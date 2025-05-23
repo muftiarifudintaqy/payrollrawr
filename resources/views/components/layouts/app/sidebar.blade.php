@@ -38,7 +38,7 @@
                     <flux:navlist.item icon="banknotes" :href="route('admin.salary-components')" :current="request()->routeIs('admin.salary-components')" wire:navigate>{{ __('Salary Components') }}</flux:navlist.item>
                     
                     {{-- Tax Setting --}}
-                    <flux:navlist.item icon="document-currency-dollar" :href="`#`" :current="`#`" wire:navigate>{{ __('Tax Settings') }}</flux:navlist.item>
+                    <flux:navlist.item icon="document-currency-dollar" :href="route('admin.tax-settings') " :current="request()->routeIs('admin.tax-settings')" wire:navigate>{{ __('Tax Settings') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 

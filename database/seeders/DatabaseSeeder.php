@@ -15,16 +15,19 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Mufti Ganteng Banget',
-            'email' => 'muftiarifudintaqy0@gmail.com',
-            'password' => bcrypt('gmailnya'),
-            'role' => 'admin',
-        ]);
+        User::updateOrCreate(
+    ['email' => 'muftiarifudintaqy0@gmail.com'],
+    [
+        'name' => 'Mufti Ganteng Banget',
+        'password' => bcrypt('password123'),
+        'role' => 'admin',
+        // field lain
+    ]
+);
 
         CompanySetting::factory()->create([
-            'name' => 'PT. Nusa',
-            'description' => 'PT. Nusa is a company that specializes in technology solutions.',
+            'name' => 'PT.MUFTI_GANTENG',
+            'description' => 'PT.MUFTI_GANTENG is a company that specializes in technology solutions.',
             'address' => 'Jl. Raya No. 123, Jakarta',
             'phone' => '62112345678',
             'value' => 'Bersama Membangun Bangsa',

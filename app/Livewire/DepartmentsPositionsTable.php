@@ -10,6 +10,8 @@ use Livewire\WithPagination;
 
 class DepartmentsPositionsTable extends Component
 {
+    protected $listeners = ['AddDepartments' => '$refresh'];
+
     use WithPagination;
     public $departments = [];
     public $selectedPositionId = "";
