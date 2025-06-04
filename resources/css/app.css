@@ -6,9 +6,6 @@
 @source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
 @source '../../vendor/livewire/flux/stubs/**/*.blade.php';
 
-@source '../../resources/**/*.blade.php';
-@source '../../vendor/masmerise/livewire-toaster/resources/views/*.blade.php';
-
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -50,7 +47,7 @@
     }
 }
 
-[data-flux-field]:not(ui-radio, ui-checkbox) {
+[data-flux-field]:not(ui-radio) {
     @apply grid gap-2;
 }
 

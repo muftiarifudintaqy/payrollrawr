@@ -4,7 +4,7 @@
         @include('partials.head')
     </head>
     <body class="min-h-screen bg-white dark:bg-zinc-800">
-        <flux:sidebar sticky stashable class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+        <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
             <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
@@ -13,36 +13,42 @@
 
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
-                    {{-- Dashboard --}}
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                    {{-- Employee Management --}}
-                    <flux:navlist.item icon="user-group" :href="`#`" :current="`#`" wire:navigate>{{ __('Employee Management') }}</flux:navlist.item>
-                    {{-- Payroll --}}
-                    <flux:navlist.item icon="circle-stack" :href="`#`" :current="`#`" wire:navigate>{{ __('Payroll') }}</flux:navlist.item>
-                    {{-- Time & Attendance --}}
-                    <flux:navlist.item icon="calendar-date-range" :href="`#`" :current="`#`" wire:navigate>{{ __('Time & Attendance') }}</flux:navlist.item>
-                    {{-- Leave Management --}}
-                    <flux:navlist.item icon="inbox-arrow-down" :href="`#`" :current="`#`" wire:navigate>{{ __('Leave Management') }}</flux:navlist.item>
-                    {{-- Reports --}}
-                    <flux:navlist.item icon="clipboard-document-list" :href="`#`" :current="`#`" wire:navigate>{{ __('Reports') }}</flux:navlist.item>
+                    <flux:navlist.item icon="user-group" :href="route('dashboard.manage-employees')" :current="request()->routeIs('dashboard.manage-employees')" wire:navigate>
+                        {{ __('Employees') }}</flux:navlist.item>
+                    <flux:navlist.item icon="circle-stack" :href="route('dashboard.payrolls')" :current="request()->routeIs('dashboard.payrolls')" wire:navigate>
+                        {{ __('Payrolls') }}</flux:navlist.item>
+                    <flux:navlist.item icon="calendar-date-range" :href="route('dashboard.time-attendance')" :current="request()->routeIs('dashboard.time-attendance')" wire:navigate>
+                        {{ __('Time & Attendance') }}</flux:navlist.item>
+                    <flux:navlist.item icon="inbox-arrow-down" :href="route('dashboard.leave-requests')" :current="request()->routeIs('dashboard.config.leave-requests')" wire:navigate>
+                        {{ __('Leave Requests') }}</flux:navlist.item>
                 </flux:navlist.group>
-
                 <flux:navlist.group :heading="__('Configuration')" class="grid">
-                    {{-- Company Setting --}}
-                    <flux:navlist.item icon="cog-6-tooth" :href="route('admin.company-settings')" :current="request()->routeIs('admin.company-settings')" wire:navigate>{{ __('Company Setting') }}</flux:navlist.item>
-                    
-                    {{-- Departments & Positions --}}
-                    <flux:navlist.item icon="building-office-2" :href="route('admin.departments-and-positions')" :current="request()->routeIs('admin.departments-and-positions')" wire:navigate>{{ __('Departments & Positions') }}</flux:navlist.item>
-
-                    {{-- Salaries Componenet --}}
-                    <flux:navlist.item icon="banknotes" :href="route('admin.salary-components')" :current="request()->routeIs('admin.salary-components')" wire:navigate>{{ __('Salary Components') }}</flux:navlist.item>
-                    
-                    {{-- Tax Setting --}}
-                    <flux:navlist.item icon="document-currency-dollar" :href="`#`" :current="`#`" wire:navigate>{{ __('Tax Settings') }}</flux:navlist.item>
+                    {{-- TODO: Implement Routes --}}
+                    <flux:navlist.item icon="building-office" :href="route('dashboard.config.company-settings')" :current="request()->routeIs('dashboard.config.company-settings')" wire:navigate>
+                        {{ __('Company Settings') }}</flux:navlist.item>
+                    <flux:navlist.item icon="building-office-2" :href="route('dashboard.config.departments-and-positions')" :current="request()->routeIs('dashboard.config.departments-and-positions')" wire:navigate>
+                        {{ __('Departments & Position') }}</flux:navlist.item>
+                    <flux:navlist.item icon="user" :href="route('dashboard.config.manage-users')" :current="request()->routeIs('dashboard.config.manage-users')" wire:navigate>
+                        {{ __('Users') }}</flux:navlist.item>
+                    <flux:navlist.item icon="chart-pie" :href="route('dashboard.config.tax-settings')" :current="request()->routeIs('none')" wire:navigate>
+                        {{ __('Tax Settings') }}</flux:navlist.item>
+                    <flux:navlist.item icon="banknotes" :href="route('dashboard.config.salary-components')" :current="request()->routeIs('dashboard.config.salary-components')" wire:navigate>
+                        {{ __('Salary Components') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
             <flux:spacer />
+
+            <flux:navlist variant="outline">
+                <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
+                    Repository
+                </flux:navlist.item>
+
+                <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits" target="_blank">
+                    Documentation
+                </flux:navlist.item>
+            </flux:navlist>
 
             <!-- Desktop User Menu -->
             <flux:dropdown position="bottom" align="start">
@@ -142,7 +148,6 @@
 
         {{ $slot }}
 
-        <x-toaster-hub />
         @fluxScripts
     </body>
 </html>

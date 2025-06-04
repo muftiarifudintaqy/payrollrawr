@@ -12,6 +12,8 @@ use Masmerise\Toaster\Toaster;
 class SalaryComponent extends Component
 {
     use WithPagination;
+    public $deductions = [];
+
     public $selectedId = '';
     public $name = '';
     public $description = '';

@@ -1,29 +1,33 @@
 <?php
 
-use App\Livewire\CompanySetting;
-use App\Livewire\SalaryComponent;
+use App\Livewire\Employee\AttendanceClocker;
+use App\Livewire\LeaveRequestForm;
+use App\Livewire\LeaveRequests;
+use App\Livewire\Settings\Appearance;
+use App\Livewire\Settings\Password;
+use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
-use Livewire\Volt\Volt;
 
-Route::redirect('/', 'dashboard')->name('home');
+Route::get('/', function () {
+    return redirect('/login');
+})->name('home');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('attendance', AttendanceClocker::class)->name('employee.attendance-clock');
+    Route::get('new-leave-request', LeaveRequestForm::class)->name('employee.new-leave-request');
+    Route::get('leave-request', LeaveRequests::class)->name('employee.leave-request');
+
     Route::redirect('settings', 'settings/profile');
 
-    Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
-    Volt::route('settings/password', 'settings.password')->name('settings.password');
-    Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
+    Route::get('settings/profile', Profile::class)->name('settings.profile');
+    Route::get('settings/password', Password::class)->name('settings.password');
+    Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
 
-// Admin Routes
-Route::middleware(['auth', 'admin'])->name('admin.')->group(function () {
-    Route::get('company-settings', CompanySetting::class)->name('company-settings');
-    Route::view('departments-and-positions', 'admin.departments-and-positions')->name('departments-and-positions');
-    Route::get('salary-components', SalaryComponent::class)->name('salary-components');
-});
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/admin.php';
+require __DIR__ . '/auth.php';
