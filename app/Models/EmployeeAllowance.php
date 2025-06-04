@@ -2,11 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class EmployeeAllowance extends Model
 {
-    protected $guarded = [];
+    use HasFactory;
+
+    protected $fillable = [
+        'allowance_id',
+        'employee_id',
+        'effective_date',
+        'amount',
+    ];
 
     public function employee()
     {

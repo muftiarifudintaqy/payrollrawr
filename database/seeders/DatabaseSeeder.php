@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\CompanySetting;
 use App\Models\User;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,22 +16,18 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::updateOrCreate(
-    ['email' => 'muftiarifudintaqy0@gmail.com'],
-    [
-        'name' => 'Mufti Ganteng Banget',
-        'password' => bcrypt('password123'),
-        'role' => 'admin',
-        // field lain
-    ]
-);
+     User::factory()->create([
+    'name' => 'Mufti Ganteng Banget',
+    'email' => 'muftiarifudintaqy0@gmail.com',
+    'password' => bcrypt('1234567890'),
+    'is_admin' => true,
+]);
 
-        CompanySetting::factory()->create([
-            'name' => 'PT.MUFTI_GANTENG',
-            'description' => 'PT.MUFTI_GANTENG is a company that specializes in technology solutions.',
-            'address' => 'Jl. Raya No. 123, Jakarta',
-            'phone' => '62112345678',
-            'value' => 'Bersama Membangun Bangsa',
-        ]);
+CompanySetting::factory()->create([
+    'name' => 'PT Mufti Karya Digital',
+    'description' => 'Perusahaan teknologi yang mengedepankan inovasi dan kualitas.',
+    'address' => 'Balls st, Bollocks ave, 1298',
+    'phone' => '+62 23028398289392',
+]);
     }
 }
